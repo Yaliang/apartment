@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "apartment"
+    },
+    "apartment": {
+      "applicationId": "3fbKPbURkYVceP1d95UpCt2KTTHgl0U0LjXDXwYw"
+    }
+  }
+}
