@@ -32,7 +32,7 @@
 				window.payJS.linkVenmo({
 					session: session.get("sessionToken"),
 					code: code,
-					success: function(vToken) {
+					success: function() {
 						pt.loadPage('home')
 					}
 				})
