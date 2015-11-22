@@ -1,0 +1,50 @@
+<title>APT.</title>
+<pageid>signup</pageid>
+
+<header>
+	<!-- <h1>APT.</h1> -->
+</header>
+<main>
+	<form id="signup-form" class="input-form" data-enhance="false">
+		<div class="form-group form-g">
+			<div class="input-group input-g" data-enhance="false">
+				<input type="text" class="form-control form-c" id="signup-username" placeholder="Username" aria-describedby="signup-username-addon1" data-enhance="false">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="input-group input-g" data-enhance="false">
+				<input type="password" class="form-control form-c" id="signup-password" placeholder="Password" aria-describedby="signup-password-addon1" data-enhance="false">
+			</div>
+		</div>
+
+		<div id="signuperror"></div>
+		<button type="submit" class="btn btn-primary btn-block btn-s" id="signup-btn" onclick="user.signup()" data-enhance="false">
+			<span class="small" style="line-height:2">Sign up</span>
+		</button>
+
+		<button type="button" class="btn btn-default btn-block btn-b" id="to-login-btn" onclick="pt.loadPage('login')" data-enhance="false">
+			<span class="small" style="line-height:2">Back to Login</span>
+		</button>
+	</form>
+
+</main>
+<contentAttrOverscroll>true</contentAttrOverscroll>
+<footer>
+	<script type="text/javascript">
+		$("#signup-form").bind("submit", function(event) {
+			console.log("submit event on form")
+			event.preventDefault()
+		})
+
+		$(document).on("pagebeforeshow", "#signup", function() {
+			ajaxloader.callback = function() {
+				$("#signup > .ctrl-page-footer").addClass("init-f")
+				$("#signup > .ctrl-page-header").addClass("init-h")
+				$("#login > .ctrl-page-content").addClass("login-ui")
+			}
+			pt.pageStack = []
+		})
+
+	</script>
+</footer>
