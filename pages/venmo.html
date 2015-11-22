@@ -28,6 +28,7 @@
 			$("#venmo > .ctrl-page-content").addClass("login-ui")
 			var query = location.search
 			var token = query.substring(query.indexOf("access_token=")+13, query.length)
+			console.log(token)
 			window.payJS.linkVenmo({
 				token: token,
 				success: function(vToken) {
