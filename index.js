@@ -75,3 +75,18 @@ ajaxloader = {
 		return obj
 	},
 }
+
+function fakepay() {
+	Parse.Session.current().then(function(session){
+		window.payJS.payVenmo({
+			session: session.get("sessionToken"),
+			dest_venmo_id: "12334234234234234234",
+			amount: 0.1,
+			note: "test test",
+			target_userid: Parse.User.current().id,
+			success: function() {
+				pt.loadPage('home')
+			}
+		})
+	})
+}

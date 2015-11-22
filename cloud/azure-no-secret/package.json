@@ -1,0 +1,27 @@
+{
+  "name": "node-apartment-api",
+  "version": "0.0.1",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.4.5",
+    "body-parser": "^1.8.1",
+    "parse": "1.4.2",
+    "request": "2.67.0"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://yaliang@apartment-api.scm.azurewebsites.net:443/apartment-api.git"
+  },
+  "keywords": [
+    "node",
+    "apartment",
+    "api",
+    "bill sharing"
+  ]
+}
