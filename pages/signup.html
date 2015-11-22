@@ -39,10 +39,7 @@
 <footer>
 	<script type="text/javascript">
 		$(document).on("pagebeforeshow", "#signup", function() {
-			$("#signup").css("background-color", "#6f5499")
-			$("#signup > .ctrl-page-footer").addClass("init-f")
 			$("#signup > .ctrl-page-header").addClass("init-h")
-			$("#login > .ctrl-page-content").addClass("login-ui")
 			$("#signup-form").submit(function(e) {
 				e.preventDefault()
 				var name = $("#signup-name").val()
