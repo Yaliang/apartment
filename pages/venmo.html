@@ -1,8 +1,22 @@
 <title>APT.</title>
 <pageid>venmo</pageid>
 <header>
+	<style type="text/css">
+		.venmo-loading {
+			background-image: url("./asset/loading/728.GIF");
+			background-repeat: no-repeat;
+			background-position: center top;
+			height: 64px;
+			width: 100%;
+			margin: auto;
+			display: block;
+			zoom: 0.7;
+			margin-top: 30%;
+		}
+	</style>
 </header>
 <main>
+	<div class='venmo-loading'></div>
 </main>
 <contentAttrOverscroll>true</contentAttrOverscroll>
 <footer>
@@ -12,6 +26,14 @@
 			$("#venmo > .ctrl-page-footer").addClass("init-f")
 			$("#venmo > .ctrl-page-header").addClass("init-h")
 			$("#venmo > .ctrl-page-content").addClass("login-ui")
+			var query = location.search
+			var token = query.substring(query.indexOf("access_token=")+13, query.length)
+			window.payJS.linkVenmo({
+				token: token,
+				success: function(vToken) {
+					pt.loadPage('home')
+				}
+			})
 		})
 	</script>
 </footer>
