@@ -75,3 +75,35 @@ ajaxloader = {
 		return obj
 	},
 }
+
+user = {
+	login: function() {
+		var username = $("#username").val()
+		var password = $("#password").val()
+		window.userJS.login({
+			name: username,
+			psw: password,
+			success: function(user) {
+				console.log("currect")
+				pt.loadPage("home")
+			},
+			error: function(error) {
+				$("#loginerror").html(error.message)
+			}
+		})
+	},
+	signup: function() {
+		var username = $("#signup-username").val()
+		var password = $("#signup-password").val()
+		window.userJS.signup({
+			email: username,
+			psw: password,
+			success: function(user) {
+				pt.loadPage("home")
+			},
+			error: function(error) {
+				$("#signuperror").html(error.message)
+			}
+		})
+	}
+}
