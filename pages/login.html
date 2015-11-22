@@ -1,0 +1,59 @@
+<title>APT.</title>
+<pageid>login</pageid>
+
+<header>
+	<!-- <h1>APT.</hq> -->
+</header>
+<main>
+	<form id="login-form" class="input-form" data-enhance="false">
+		<div class="form-group form-g">
+			<div class="input-group input-g" data-enhance="false">
+				<input type="text" class="form-control form-c" id="username" placeholder="Username" aria-describedby="username-addon1" data-enhance="false">
+			</div>
+		</div>
+
+		<div class="form-group form-g">
+			<div class="input-group input-g" data-enhance="false">
+				<input type="password" class="form-control form-c" id="password" placeholder="Password" aria-describedby="password-addon1" data-enhance="false">
+			</div>
+		</div>
+
+		<div id="loginerror"></div>
+
+		<button type="submit" class="btn btn-primary btn-block btn-s" id="login-btn" data-enhance="false">
+			<span class="small" style="line-height:2">Login</span>
+		</button>
+
+		<button type="button" class="btn btn-default btn-block btn-b" id="to-signup-btn" onclick="pt.loadPage('signup')" data-enhance="false">
+			<span class="small" style="line-height:2">Sign up for APT.</span>
+		</button>
+	</form>
+</main>
+
+<contentAttrOverscroll>true</contentAttrOverscroll>
+<footer>
+	<script type="text/javascript">
+		$(document).on("pagebeforeshow", "#login", function() {
+			$("#login").css("background-color", "#6f5499")
+			$("#login > .ctrl-page-footer").addClass("init-f")
+			$("#login > .ctrl-page-header").addClass("init-h")
+			$("#login > .ctrl-page-content").addClass("login-ui")
+			$("#login-form").submit(function(e) {
+				e.preventDefault()
+				var username = $("#username").val()
+				var password = $("#password").val()
+				window.userJS.login({
+					name: username,
+					psw: password,
+					success: function(user) {
+						pt.loadPage("home")
+					},
+					error: function(error) {
+						$("#loginerror").html(error.message)
+					}
+				})
+			})
+			pt.pageStack = []
+		})
+	</script>
+</footer>

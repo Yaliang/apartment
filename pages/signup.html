@@ -1,0 +1,67 @@
+<title>APT.</title>
+<pageid>signup</pageid>
+
+<header>
+	<!-- <h1>APT.</h1> -->
+</header>
+<main>
+	<form id="signup-form" class="input-form" data-enhance="false">
+		<div class="form-group form-g">
+			<div class="input-group input-g" data-enhance="false">
+				<input type="text" class="form-control form-c" id="signup-name" placeholder="Name" aria-describedby="signup-name-addon1" data-enhance="false">
+			</div>
+		</div>
+
+		<div class="form-group form-g">
+			<div class="input-group input-g" data-enhance="false">
+				<input type="text" class="form-control form-c" id="signup-email" placeholder="Email" aria-describedby="signup-email-addon1" data-enhance="false">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="input-group input-g" data-enhance="false">
+				<input type="password" class="form-control form-c" id="signup-password" placeholder="Password" aria-describedby="signup-password-addon1" data-enhance="false">
+			</div>
+		</div>
+
+		<div id="signuperror"></div>
+		<button type="submit" class="btn btn-primary btn-block btn-s" id="signup-btn" data-enhance="false">
+			<span class="small" style="line-height:2">Sign up</span>
+		</button>
+
+		<button type="button" class="btn btn-default btn-block btn-b" id="to-login-btn" onclick="pt.loadPage('login')" data-enhance="false">
+			<span class="small" style="line-height:2">Back to Login</span>
+		</button>
+	</form>
+
+</main>
+<contentAttrOverscroll>true</contentAttrOverscroll>
+<footer>
+	<script type="text/javascript">
+		$(document).on("pagebeforeshow", "#signup", function() {
+			$("#signup").css("background-color", "#6f5499")
+			$("#signup > .ctrl-page-footer").addClass("init-f")
+			$("#signup > .ctrl-page-header").addClass("init-h")
+			$("#login > .ctrl-page-content").addClass("login-ui")
+			$("#signup-form").submit(function(e) {
+				e.preventDefault()
+				var name = $("#signup-name").val()
+				var email = $("#signup-email").val()
+				var password = $("#signup-password").val()
+				window.userJS.signup({
+					name: name,
+					email: email,
+					psw: password,
+					success: function(user) {
+						pt.loadPage("home")
+					},
+					error: function(error) {
+						$("#signuperror").html(error.message)
+					}
+				})
+			})
+			pt.pageStack = []
+		})
+
+	</script>
+</footer>
