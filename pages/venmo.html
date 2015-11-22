@@ -28,13 +28,16 @@
 			$("#venmo > .ctrl-page-content").addClass("login-ui")
 			var query = location.search
 			var token = query.substring(query.indexOf("access_token=")+13, query.length)
-			console.log(token)
-			window.payJS.linkVenmo({
-				token: token,
-				success: function(vToken) {
-					pt.loadPage('home')
-				}
+			Parse.Session.current().then(function(session){
+				window.payJS.linkVenmo({
+					session: session.get("sessionToken"),
+					token: token,
+					success: function(vToken) {
+						pt.loadPage('home')
+					}
+				})
 			})
+			
 		})
 	</script>
 </footer>
