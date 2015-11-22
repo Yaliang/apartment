@@ -104,12 +104,19 @@
     padding-right:20px; 
     padding-left:20px; 
     margin-top:10px !important;
+    height: 70%;
+    overflow-y: hidden;
 }
 .bill-header{
     /*border: 1px solid;*/
     height: 21%;
     padding-top:15px; 
     padding-left:20px; 
+}
+
+.bill-row{
+    height: 65%;
+    overflow-y: hidden;
 }
 
 .bill-list{
@@ -155,7 +162,8 @@
 .btn-p{
     position: absolute !important;
     bottom: 10px !important;
-    left: 82% !important;
+    /*left: 82% !important;*/
+    right: 20px;
 }
 .head-title{
     padding-top: 0px !important;
@@ -181,7 +189,7 @@
 .input-s {
     position: absolute !important;
     width:60%;
-    left:60px;
+    left:10vw;
     bottom:10px;
     border-radius: 10px;
     border: 1px solid !important;
