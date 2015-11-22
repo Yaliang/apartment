@@ -35,29 +35,12 @@
 	<script type="text/javascript">
 		$(document).on("pagebeforeshow", "#login", function() {
 			ajaxloader.callback = function() {
+				$("#login").css("background-color", "#6f5499")
 				$("#login > .ctrl-page-footer").addClass("init-f")
 				$("#login > .ctrl-page-header").addClass("init-h")
 				$("#login > .ctrl-page-content").addClass("login-ui")
 				pt.pageStack = []
 			}
 		})
-		// $("#login-form").bind("submit", function(event) {
-		// 	console.log("submit event on form")
-		// 	event.preventDefault()
-		// })
-
-		// user.autologin()
-
-		// $(document).on("pagebeforeshow", "#login", function() {
-		// 	console.log("show")
-		// 	$("#username").val("")
-		// 	$("#password").val("")
-		// 	$("#loginerror").html("")
-		// })
-
-		// console.log("run")
-
-		// $("#to-signup-btn").after("<p class='alert alert-success'>"+navigator.userAgent+"</p>")
-
 	</script>
 </footer>
