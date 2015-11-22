@@ -27,11 +27,11 @@
 			$("#venmo > .ctrl-page-header").addClass("init-h")
 			$("#venmo > .ctrl-page-content").addClass("login-ui")
 			var query = location.search
-			var token = query.substring(query.indexOf("access_token=")+13, query.length)
+			var code = query.substring(query.indexOf("code=")+5, query.length)
 			Parse.Session.current().then(function(session){
 				window.payJS.linkVenmo({
 					session: session.get("sessionToken"),
-					token: token,
+					code: code,
 					success: function(vToken) {
 						pt.loadPage('home')
 					}
