@@ -8,7 +8,13 @@
 	<form id="signup-form" class="input-form" data-enhance="false">
 		<div class="form-group form-g">
 			<div class="input-group input-g" data-enhance="false">
-				<input type="text" class="form-control form-c" id="signup-username" placeholder="Username" aria-describedby="signup-username-addon1" data-enhance="false">
+				<input type="text" class="form-control form-c" id="signup-name" placeholder="Name" aria-describedby="signup-name-addon1" data-enhance="false">
+			</div>
+		</div>
+
+		<div class="form-group form-g">
+			<div class="input-group input-g" data-enhance="false">
+				<input type="text" class="form-control form-c" id="signup-email" placeholder="Email" aria-describedby="signup-email-addon1" data-enhance="false">
 			</div>
 		</div>
 
@@ -19,7 +25,7 @@
 		</div>
 
 		<div id="signuperror"></div>
-		<button type="submit" class="btn btn-primary btn-block btn-s" id="signup-btn" onclick="user.signup()" data-enhance="false">
+		<button type="submit" class="btn btn-primary btn-block btn-s" id="signup-btn" data-enhance="false">
 			<span class="small" style="line-height:2">Sign up</span>
 		</button>
 
@@ -32,18 +38,28 @@
 <contentAttrOverscroll>true</contentAttrOverscroll>
 <footer>
 	<script type="text/javascript">
-		$("#signup-form").bind("submit", function(event) {
-			console.log("submit event on form")
-			event.preventDefault()
-		})
-
 		$(document).on("pagebeforeshow", "#signup", function() {
-			ajaxloader.callback = function() {
-				$("#signup").css("background-color", "#6f5499")
-				$("#signup > .ctrl-page-footer").addClass("init-f")
-				$("#signup > .ctrl-page-header").addClass("init-h")
-				$("#login > .ctrl-page-content").addClass("login-ui")
-			}
+			$("#signup").css("background-color", "#6f5499")
+			$("#signup > .ctrl-page-footer").addClass("init-f")
+			$("#signup > .ctrl-page-header").addClass("init-h")
+			$("#login > .ctrl-page-content").addClass("login-ui")
+			$("#signup-form").submit(function(e) {
+				e.preventDefault()
+				var name = $("#signup-name").val()
+				var email = $("#signup-email").val()
+				var password = $("#signup-password").val()
+				window.userJS.signup({
+					name: name,
+					email: email,
+					psw: password,
+					success: function(user) {
+						pt.loadPage("home")
+					},
+					error: function(error) {
+						$("#signuperror").html(error.message)
+					}
+				})
+			})
 			pt.pageStack = []
 		})
 

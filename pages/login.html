@@ -20,7 +20,7 @@
 
 		<div id="loginerror"></div>
 
-		<button type="submit" class="btn btn-primary btn-block btn-s" id="login-btn" onclick="user.login()" data-enhance="false">
+		<button type="submit" class="btn btn-primary btn-block btn-s" id="login-btn" data-enhance="false">
 			<span class="small" style="line-height:2">Login</span>
 		</button>
 
@@ -34,13 +34,26 @@
 <footer>
 	<script type="text/javascript">
 		$(document).on("pagebeforeshow", "#login", function() {
-			ajaxloader.callback = function() {
-				$("#login").css("background-color", "#6f5499")
-				$("#login > .ctrl-page-footer").addClass("init-f")
-				$("#login > .ctrl-page-header").addClass("init-h")
-				$("#login > .ctrl-page-content").addClass("login-ui")
-				pt.pageStack = []
-			}
+			$("#login").css("background-color", "#6f5499")
+			$("#login > .ctrl-page-footer").addClass("init-f")
+			$("#login > .ctrl-page-header").addClass("init-h")
+			$("#login > .ctrl-page-content").addClass("login-ui")
+			$("#login-form").submit(function(e) {
+				e.preventDefault()
+				var username = $("#username").val()
+				var password = $("#password").val()
+				window.userJS.login({
+					name: username,
+					psw: password,
+					success: function(user) {
+						pt.loadPage("home")
+					},
+					error: function(error) {
+						$("#loginerror").html(error.message)
+					}
+				})
+			})
+			pt.pageStack = []
 		})
 	</script>
 </footer>
