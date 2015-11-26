@@ -124,6 +124,10 @@
     z-index: -10;
 }
 
+.empty-summary {
+    display: none;
+}
+
 .bill-header{
     padding-top:15px; 
     padding-left:20px; 

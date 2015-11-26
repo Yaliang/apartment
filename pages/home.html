@@ -16,32 +16,8 @@
 			<span class="f-title">Summary</span>
 		</div>
 		<ul class="list-group bill-row" id="summary-list">
-		<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
+		<li class="list-group-item bill-list empty-summary summary-item" data-target-id="" data-target-name="" data-balance="">
 		</li>
-		<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
-		</li>
-		<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
-		</li>
-		<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
-		</li>
-		<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
-		</li>
-		<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
-		</li>
-		<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
-		</li>
-		<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
-		</li>
-			<li class="list-group-item bill-list empty-summary summary-item" data-contact-id="" data-contact-name="" data-amount="">example
-			<span class='pull-right badge b_text'>2.0</span>
 		</ul>
 		<div class="bill-row-footer row ">
 			<div class="btn-p">
@@ -142,6 +118,55 @@
 <contentAttrOverscroll>true</contentAttrOverscroll>
 <footer>
 	<script type="text/javascript">
+		function loadSummary(apt) {
+			window.payJS.summary({
+				apt_token: apt.id,
+				success: function(obj) {
+					var target_id = obj.target
+					var balance = obj.balance
+					console.log(balance)
+					var content = "<span class='bill_list_target_name'></span><span class='pull-right badge b_text'>"+balance.toString()+"</span>"
+					var newli = $(".bill-list.empty-summary.summary-item").clone(true)
+					$(".empty-summary").after(newli)
+					newli.removeClass("empty-summary");
+					newli.html(content)
+					newli.attr('data-target-id', target_id)
+					newli.attr('data-balance', balance.toString)
+					window.userJS.getName({
+						target: target_id,
+						success: function(user) {
+							$("[data-target-id = '"+target_id+"']").attr('data-target-name', user.get('Name'))
+							$("[data-target-id = '"+target_id+"'] > .bill_list_target_name").html(user.get('Name'))
+						}
+					})
+				},
+				error: function(err) {
+					console.log(err)
+				}
+			})
+
+		}
+		if (localStorage.curretApt) {
+			window.userJS.enterApt({
+				apt_token: localStorage.curretApt,
+				success: function(apt) {
+					loadSummary(apt)
+				},
+				error: function(err) {
+					console.log(err)
+				}
+			})
+		} else {
+			window.userJS.selectApt({
+				success: function(apt) {
+					localStorage.curretApt = apt.id
+					loadSummary(apt)
+				},
+				error: function(err) {
+					console.log(err)
+				}
+			})
+		}
 	</script>
 	
 </footer>
